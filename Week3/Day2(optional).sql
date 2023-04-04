@@ -46,4 +46,19 @@ order by count(rental_rate) DESC
 limit 5;
 
 ###6.List the top five genres in gross revenue in descending order.
-select name from category
+select category.name,sum(payment.amount) as amount from category
+join film_category using (category_id)
+join inventory using (film_id)
+join rental using (inventory_id)
+join payment using (customer_id)
+group by category.name
+order by amount desc
+limit 5;
+
+####7.Is "Academy Dinosaur" available for rent from Store 1?
+
+select store.store_id,film.title from film
+join inventory using (film_id)
+join store using (store_id)
+order by film.title ASC
+limit 1;
