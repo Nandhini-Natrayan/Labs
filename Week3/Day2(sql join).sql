@@ -13,7 +13,7 @@ limit 1;
 
 #####2.Most active customer (the customer that has rented the most number of films)
 
-select c.first_name,c.last_name,count(*) as Total from customer as c
+select c.first_name,c.last_name,count(c.customer_id) as Total from customer as c
 inner join rental as r
 on c.customer_id=r.customer_id
 group by c.customer_id
@@ -25,7 +25,6 @@ limit 1;
 select count(film_id),c.name from film_category as film_ca
 inner join category as c
 on film_ca.category_id=c.category_id
-
 group by c.category_id;
 
 #####4.Display the first and last names, as well as the address, of each staff member.
@@ -41,7 +40,7 @@ on staff.address_id=address.address_id;
 select film.title,language.name from film
 inner join language
 on film.language_id=language.language_id
-WHERE title LIKE 'M%'
+WHERE (name='italian' or name='english') and title LIKE 'M%'
 order by title DESC;
 
 ######6.Display the total amount rung up by each staff member in August of 2005.

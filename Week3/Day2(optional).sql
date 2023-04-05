@@ -50,7 +50,7 @@ select category.name,sum(payment.amount) as amount from category
 join film_category using (category_id)
 join inventory using (film_id)
 join rental using (inventory_id)
-join payment using (customer_id)
+join payment using (rental_id)
 group by category.name
 order by amount desc
 limit 5;
